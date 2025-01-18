@@ -1,13 +1,13 @@
-FROM odoo:16.0
+FROM odoo:16
 
-# Copiar o arquivo de configuração para o container
-COPY ./odoo.conf /etc/odoo/odoo.conf
+# Copie os módulos e configurações do Odoo
+COPY . /mnt/extra-addons
+COPY ./config/odoo.conf /etc/odoo/
 
-# Adicionar script de inicialização
-COPY ./entrypoint.sh /entrypoint.sh
-RUN chmod +x /entrypoint.sh
+# Configuração de permissões
+RUN chmod -R 777 /mnt/extra-addons && chmod -R 777 /etc/odoo/
 
-# Expor porta padrão do Odoo
+# Expor a porta padrão do Odoo
 EXPOSE 8069
 
-ENTRYPOINT ["/entrypoint.sh"]
+CMD ["odoo"]
