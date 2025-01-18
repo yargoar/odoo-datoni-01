@@ -1,1 +1,1 @@
-web: docker run --rm -p $PORT:8069 odoo:heroku
+web: docker run --rm -p 8069:8069 odoo:latest
